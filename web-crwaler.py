@@ -1,10 +1,6 @@
-import urllib.request as req
+from selenium import webdriver
 
-url = 'https://www.ptt.cc/bbs/Stock/index.html'
+driver = webdriver.Chrome()
 
-try:
-    response = req.urlopen(url)
-    print(url)
-finally:
-    # response.close()
-    print('hello world')
+driver.get("https://www.selenium.dev/selenium/web/web-form.html")
+print(driver.title)
