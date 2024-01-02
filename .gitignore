@@ -6,7 +6,7 @@
 .env
 
 # selenium 配置
-/chromedriver-mac-arm64/
+/taipei/chromedriver-mac-arm64
 
 
 # vscode 配置
