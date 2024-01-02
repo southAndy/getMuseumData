@@ -3,6 +3,7 @@ import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 import json
 
@@ -10,9 +11,13 @@ url = 'https://www.huashan1914.com/w/huashan1914/exhibition?typeId=1711131725524
 chromeDriverPath = './chromedriver-mac-arm64/chromedriver'
 s = Service(chromeDriverPath)
 
+# 設定模仿瀏覽器
+options = Options()
+options.add_argument("--disable-notifications")
+
 # 用 selenium 開啟瀏覽器
 try:
-    driver = webdriver.Chrome(service=s)    
+    driver = webdriver.Chrome(service=s, options=options)    
     driver.get(url)
     content = driver.page_source # 取得網頁原始碼
     # get a tag in content
@@ -21,9 +26,6 @@ try:
     aTags = soup.find_all('li', class_='item-static')
     # get a tag in li
     # for aTag in aTags:
-    for tag in content:
-        print(tag)
-
     
     time.sleep(100000) # 100 秒後關閉瀏覽器
 
