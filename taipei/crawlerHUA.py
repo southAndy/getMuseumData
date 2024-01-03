@@ -2,12 +2,11 @@ import requests
 import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 import os
-
-import json
+from json_utils import write_json
 
 url = 'https://www.huashan1914.com/w/huashan1914/exhibition?typeId=17111317255246856'
 chromeDriverPath = './chromedriver-mac-arm64/chromedriver'
@@ -22,9 +21,9 @@ options.add_argument("--disable-notifications")
 
 # 用 selenium 開啟瀏覽器
 try:
-    driver = webdriver.Chrome(service=s, options=options)    
+    driver = webdriver.Chrome(service=s, options=options)
     driver.get(url)
-    content = driver.page_source # 取得網頁原始碼
+    content = driver.page_source  # 取得網頁原始碼
     # get a tag in content
 
     soup = BeautifulSoup(content, 'html.parser')
@@ -37,7 +36,7 @@ try:
         aTag = aTag.find('a')
         # 取得 a tag 的 href，並存入陣列
         hrefs.append(aTag['href'])
-    
+
     # 建立一個 dict 來存放所有的展覽資訊
     result = []
     # 進入每個展覽的網頁
@@ -46,7 +45,7 @@ try:
         target = web_Prefix + href
         print(target)
         driver.get(target)
-        content = driver.page_source # 取得網頁原始碼
+        content = driver.page_source  # 取得網頁原始碼
         soup = BeautifulSoup(content, 'html.parser')
         # 取得展覽標題
         title = soup.find('div', class_='article-title')
@@ -77,10 +76,8 @@ try:
         result.append(exhibition)
     print(result)
     # 將資料存成 json 檔案
-    with open('HUA1914.json', 'w', encoding='utf-8') as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
-    
-    time.sleep(100000) # 100 秒後關閉瀏覽器
+    write_json(result, 'HUA1914.json')
+    time.sleep(100000)  # 100 秒後關閉瀏覽器
 
 except Exception as e:
     print(f"Error: {e}")
