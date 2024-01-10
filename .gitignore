@@ -2,12 +2,15 @@
 .DS_Store
 
 
-# 各網站的特殊配置
+# 環境變數
 .env
-
-# selenium 配置
-/taipei/chromedriver-mac-arm64
-
 
 # vscode 配置
 .vscode
+
+
+# Virtual environment
+crawler-database
+
+# venv config
+pyvenv.cfg
