@@ -1,4 +1,4 @@
-from json_utils import write_json
+# from json_utils import write_json
 import requests
 import time
 from bs4 import BeautifulSoup
@@ -8,6 +8,8 @@ from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 import sys
 import os
+# 存入資料庫
+from pymongo_get_database import get_database
 
 url = 'https://www.huashan1914.com/w/huashan1914/exhibition?typeId=17111317255246856'
 chromeDriverPath = './chromedriver'
@@ -75,38 +77,10 @@ try:
 
         # 將每個展覽的資訊存入 result 陣列
         result.append(exhibition)
-    print(result)
-    # 將資料存成 json 檔案
-    write_json(result, 'HUA1914.json')
-    time.sleep(100000)  # 100 秒後關閉瀏覽器
+    get_database(result)
+
+    # 100 秒後關閉瀏覽器
+    time.sleep(100000)
 
 except Exception as e:
     print(f"Error: {e}")
-
-
-# response = requests.get(url)
-# result = {"hitRate": 0, "UID": 0, }
-# # 如果回傳值是 200 代表請求成功
-# if response.status_code == 200:
-#     # 將回傳值的文字內容取出
-#     museumContent = BeautifulSoup(response.text, 'html.parser')
-#     # 取出展覽文章標題
-#     titles = museumContent.find('div', class_='BigTitle')
-#     result['title'] = titles.text
-#     # 取出展覽日期
-#     dates = museumContent.find('div', class_='SDate')
-#     result['date'] = dates.text
-#     # 取出展覽圖片 src (如果有的話)
-#     if museumContent.find('div', class_='TopBnrArea2'):
-#         images = museumContent.find('div', class_='TopBnrArea2')
-#         result['image'] = images.find('img')['src']
-#     else:
-#         images = ''
-#         result['image'] = ''
-#     # 取出展覽內容
-#     contents = museumContent.find('div', class_='CRow')
-#     result['content'] = contents.text
-
-# # 存成 json 檔案
-# with open('MOFA.json', 'w', encoding='utf-8') as f:
-#     json.dump(result, f, ensure_ascii=False, indent=2)
