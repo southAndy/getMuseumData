@@ -8,6 +8,8 @@
 # vscode 配置
 .vscode
 
+# __pycache__目錄包含了Python的.pyc字節碼文件。這些文件是Python源碼的編譯版本，Python可以直接執行這些文件，而不需要先解析源碼。這可以加快Python程式碼的加載速度。 但 Python 可以在沒有它們的情況下運行
+__pycache__ 
 
 # Virtual environment
 crawler-database
