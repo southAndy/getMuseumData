@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 import sys
 import os
 # 存入資料庫
-from pymongo_get_database import get_database
+from utils.access_database import get_database
 
 url = 'https://www.huashan1914.com/w/huashan1914/exhibition?typeId=17111317255246856'
 chromeDriverPath = './chromedriver'
