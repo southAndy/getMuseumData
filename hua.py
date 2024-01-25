@@ -1,4 +1,3 @@
-# from json_utils import write_json
 import requests
 import time
 from bs4 import BeautifulSoup
