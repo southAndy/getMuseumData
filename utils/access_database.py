@@ -10,7 +10,7 @@ def get_database(data):
     database_url = os.getenv('DB_URL_LOCAL')
     CONNECTION_STRING = database_url
 
-    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
+    # 連線對應的資料庫
     client = MongoClient(CONNECTION_STRING)
 
     # 切換到展覽資料庫
