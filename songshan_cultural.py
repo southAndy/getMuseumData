@@ -75,5 +75,10 @@ try:
 
 except Exception as e:
     print(e)
+    driver.close()
+    print('=======================')
+    print('爬蟲失敗')
+    print('=======================')
+    result = []
 
 
